@@ -436,3 +436,4 @@ def print_by_sort_vid(prodykt:list[Fish]):
             print_one_fish(fisshi)
 
 # пороль 3455
+
