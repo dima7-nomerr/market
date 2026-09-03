@@ -6,7 +6,7 @@ class Fish:
     vid: str
     prigotovlenie: str
     data_isgotovleni: str
-    ves: str
+    ves: float
     tsena: int
     razmer: str
     id: int | None = None
