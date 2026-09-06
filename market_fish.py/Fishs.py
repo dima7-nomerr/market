@@ -2,12 +2,19 @@ from dataclasses import dataclass
 
 @dataclass(slots=True)
 class Fish:
-    mazvanie_prodykta: str
-    vid: str
-    prigotovlenie: str
-    data_isgotovleni: str
-    ves: float
-    tsena: int
-    razmer: str
+    product_name: str
+    view: str
+    preparetion: str
+    date_of_manufacture: str
+    weight: float
+    price: int 
+    size: str   
     id: int | None = None
 
+@dataclass(slots=True)
+class Drink:
+    drink_name: str
+    volume: float
+    price: int
+    quantity: int
+    id: int | None = None
