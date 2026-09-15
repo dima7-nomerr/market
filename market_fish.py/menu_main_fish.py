@@ -1,10 +1,12 @@
 from fishs import *
 from fish_functions import *
 
+
 def separator():
     print()
     print("=="*20)
     print()
+
 
 
 
@@ -20,6 +22,7 @@ def separator_2():
 
 
 
+# главное меню продавца (админа)
 def menu_admin():
     input("нажми enter ")
     separator()
@@ -48,6 +51,7 @@ def menu_admin():
 
 
 
+# меню выбора сортировки товаров
 def sort_prodykt():
     separator()
     print("напиши цифру 1 чтобы вывести по размеру")
@@ -55,15 +59,17 @@ def sort_prodykt():
     print("напиши цифру 3 чтобы вывести по приготовлению")
     print("напиши цифру 4 чтобы вывести по цене")
     print("напиши цифру 5 чтобы отсортировать от большего к меньшему по весу ")
-    print("напиши цифру 6 отсортировать от большего к меньшему по весу ")
+    print("напиши цифру 6 отсортировать от большего к меньшему по цене ")
     print("напиши цифру 7 чтобы найти по виду ")
+    print("напиши цифру 0 выйти")
+    print
     separator()
     
     while True:
 
         try:
             state_sort=int(input("напиши сюда число: "))
-            if state_sort>=1 and state_sort<=7:
+            if state_sort>=0 and state_sort<=7:
                 return state_sort
             print("вы ввели слишком маленькоое или слишком большое слово ")
         except:
@@ -72,6 +78,7 @@ def sort_prodykt():
 
 
 
+# главное меню покупателя
 def user_menu():
     input("нажми enter ")
     separator()
