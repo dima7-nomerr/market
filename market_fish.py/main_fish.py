@@ -1,6 +1,12 @@
 from fishs import *
 from fish_functions import *
 from menu_main_fish import *
+
+
+# JapaneseWormFromChina 🐛
+
+
+
 prodykt= []
 buy_fish = []
 porol=3455
@@ -11,7 +17,7 @@ user_state=-1
 is_running= True
 generation_drink(drinks)
 
-
+print_by_sort_view
 # сделать так чтобы при вводе нельзя было написать менше размер чем большой размер
 
 while is_running==True:
@@ -44,7 +50,7 @@ while is_running==True:
         print_products(prodykt)
 
     elif user_state == 3:
-        running= True
+        running = True
         while running==True:
             state_sort=sort_prodykt()
             if state_sort == 1:
@@ -71,14 +77,18 @@ while is_running==True:
                 input("нажмите enter для продолжения ")
             elif state_sort == 5:
                 sort_by_weight_desc(prodykt)
+                input("нажмите enter для продолжения ")
             elif state_sort == 6:
                 sort_by_price(prodykt)
+                input("нажмите enter для продолжения ")
             elif state_sort == 7:
                 print_by_sort_view(prodykt)
                 input("нижми enter для продолжения ")
+            elif state_sort == 0:
+                running=False
 
 
-            running==False
+            
         
         
 
@@ -228,13 +238,19 @@ while is_running==True:
 
                 elif state_sort == 5:
                     sort_by_weight_desc(prodykt)
+                    input("нажмите enter для продолжения ")
 
                 elif state_sort == 6:
                     sort_by_price(prodykt)
+                    input("нажмите enter для продолжения ")
 
                 elif state_sort == 7:
                     print_by_sort_view(prodykt)
                     input("нижми enter для продолжения ")
+
+                elif state_sort == 0:
+                    running=False
+
 
 
 
@@ -302,20 +318,21 @@ while is_running==True:
 
                     elif 2 == admine_sort_numder:
 
-                        necessary_volume_max=check_by_int("напиши до какого объёма будут показыватся напики")
-                        necessary_volume_min=check_by_int("напиши от какого объёма будут показыватся напики")
+                        necessary_volume_max=correct_input_float("напиши до какой цены будут показыватся напики ", 0 , 1000000000000000)
+                        necessary_volume_min=correct_input_float("напиши от какой цены будут показыватся напики ", 0 , 1000000000000000)
+                                                
                         
                         sort_by_volume(drinks, necessary_volume_max, necessary_volume_min)
 
                     elif 3 == admine_sort_numder:
-                        necessary_price_max=check_by_int("напиши до какой цены будут показыватся напики")
-                        necessary_price_min=check_by_int("напиши от какой цены будут показыватся напики")
+                        necessary_price_max=check_by_int("напиши до какой цены будут показыватся напики ")
+                        necessary_price_min=check_by_int("напиши от какой цены будут показыватся напики ")
                         
                         sort_by_price(drinks, necessary_price_max, necessary_price_min)
 
                     elif 4 == admine_sort_numder:
-                        necessary_quantity_max=check_by_int("напиши до какого количества напитков будут показыватся напики")
-                        necessary_quantity_min=check_by_int("напиши от какого количества напитков будут показыватся напики")
+                        necessary_quantity_max=check_by_int("напиши до какого количества напитков будут показыватся напики ")
+                        necessary_quantity_min=check_by_int("напиши от какого количества напитков будут показыватся напики" )
                                                 
 
                         sort_by_quantity(drinks, necessary_quantity_max, necessary_quantity_min)
@@ -331,7 +348,7 @@ while is_running==True:
         elif admin_state == 0:
             print("это всё что вы купили")
             print_products(buy_fish)
-            print_products(drinks_buy)
+            print_drinks(drinks_buy)
             is_running= False
 
 
