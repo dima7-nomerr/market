@@ -53,7 +53,7 @@ def input_fish_dataclass()-> Fish:
     weight=correct_input_float("напиши вес продукта в кг: ", 0 , 1000000000000)
     separator()
 
-    # проверка на нужный ввод
+    
     print('пример(18000) водить только цифры ')
     price=price_input_by_int("напиши цену продукта: ", 0, 10000000000000 )
     separator()
@@ -117,7 +117,8 @@ def generation_drink(drinks:list[Drink]):
 
 def input_drink_by_dataclass_Drink():
     separator()
-    drink_name=correct_input_word("напиши название напитка: ", "fanta | sprite | pepsi", 2, 15)
+    
+    drink_name=correct_input_word_drink("напиши название напитка: ", "fanta | sprite | pepsi", 2, 15)
     separator()
 
 
@@ -141,7 +142,19 @@ def input_drink_by_list(drinks:list[Drink], new_drink):
     drinks.append(new_drink)
 
 
+def correct_input_word_drink(opisanie, clova, min_pazmer, max_razmer ):
+    while True:
+        try:
+            print(f"вот пример  {clova} ")
+            correct_word=input(opisanie).lower().strip()
+            
+            if len(correct_word)>=min_pazmer and len(correct_word)<=max_razmer:
 
+                    return correct_word
+            print("вы ввели слишком маленькое или слишком большое число")
+            
+        except:
+            print("вы ввели что-то не то")
 
 
 def id_drink():
@@ -196,7 +209,7 @@ def replenish_quantity(drinks:list[Drink], replenish_drink):
 
 
 def to_change_drink(drinks:list[Fish], new_drink):
-    new_drink.drink_name =correct_input_word("напиши название напитка: ", "fanta | sprite | pepsi", 2, 15)
+    new_drink.drink_name =correct_input_word_drink("напиши название напитка: ", "fanta | sprite | pepsi", 2, 15)
     new_drink.volume = correct_input_float("напиши объём напитка в литрах: ", 0 , 1000000000)
     new_drink.price=price_input_by_int("напиши количество напитков: ", 0, 10000000)
     new_drink.quantity = price_input_by_int("напиши количество напитков: ", 0, 10000000)
@@ -210,20 +223,30 @@ def buy_drink(drinks_buy:list[Drink], id_buy_drink, drinks:list[Drink]):
     while True:
         try:
             quantity=int(input("напиши колличество напитков: "))
-            if quantity>0 or quantity<10000000000000000000000000000:
+            # проверяем что число положительное и не слишком большое
+            if quantity>0 and quantity<100000000000:
+                # проверяем, что на складе хватает напитков
                 if id_buy_drink.quantity >= quantity:
                     id_buy_drink.quantity = id_buy_drink.quantity - quantity
                     print("вы купили напитки")
-                print("такого количества нету на складе")
 
-            else:   
+                    id_buy_drink.quantity=quantity
+
+                    drinks_buy.append(id_buy_drink)
+                    break
+                else:
+                    print("такого количества нету на складе")
+            else:
                 print("вы ввели слишком большое или слишком маленькое число")
         except:
             print("вы ввели не число")
 
-        id_buy_drink.quantity=quantity
 
-        drinks_buy.append=id_buy_drink
+
+
+
+
+
 
 
 def print_one_drink(drink_one):
@@ -240,30 +263,30 @@ def print_drinks(drinks:list[Drink]):
 
 def sort_by_drink_name(drinks:list[Drink], necessary_drink_name):
     for productname in drinks:
-        if productname.product_name == necessary_drink_name:
-            print_one_fish(productname)
+        if productname.drink_name == necessary_drink_name:
+            print_one_drink(productname)
 
 
 # до какого объёма
 def sort_by_volume(drinks:list[Drink], necessary_volume_max, necessary_volume_min):
     for productname in drinks:
-        if productname.volume <= necessary_volume_max or productname.volume >= necessary_volume_min :
-            print_one_fish(productname)
+        if productname.volume <= necessary_volume_max and productname.volume >= necessary_volume_min :
+            print_one_drink(productname)
 
 
 
 # до какой цены
-def sort_by_price(drinks:list[Drink], necessary_price_max,necessary_price_min):
+def sort_drink_by_price(drinks:list[Drink], necessary_price_max,necessary_price_min):
     for productname in drinks:
-        if productname.price <= necessary_price_max or productname.price >= necessary_price_min:
-            print_one_fish(productname)
+        if productname.price <= necessary_price_max and productname.price >= necessary_price_min:
+            print_one_drink(productname)
 
 
 # от какого количества напитков
 def sort_by_quantity(drinks:list[Drink], necessary_quantity_max, necessary_quantity_min):
     for productname in drinks:
-        if productname.quantity >= necessary_quantity_max or productname.quantity >= necessary_quantity_min:
-            print_one_fish(productname)
+        if productname.quantity <= necessary_quantity_max and productname.quantity >= necessary_quantity_min:
+            print_one_drink(productname)
 
             
 
@@ -418,7 +441,7 @@ def print_by_size(necessary_size, prodykt:list[Fish]):
 
 
 
-# некак не используетсь!!!!!!!!!!!!!!!!!!!!!!!!!
+
 def print_by_product_name(necessary_product_name, prodykt:list[Fish]):
     for productname in prodykt:
         if productname.product_name == necessary_product_name:
@@ -517,6 +540,7 @@ def new_porol():
 
 
 def input_porol(porol):
+    
     print("в какой аккаунт вы хотите зайти? ")
     print("1 - в аккаунт покупателя")
     print("2 - в аккаунт продовца")
@@ -534,18 +558,18 @@ def input_porol(porol):
 
 
     elif start == 2:
+        
         while True:
             try:
                 user_porol=int(input("введи пороль: "))
-                break
+                if user_porol == porol:
+                    print("вы вошли как продовец")
+                    return "cypher"
+                print("вы ввели пороль неправельно")
+                
             except:
                 print("вы ввели не число")
 
-        if user_porol == porol:
-            print("вы вошли как продовец")
-            return "cypher"
-        print("ты чё пороль не знаешь? или хочешь зайти на аккаунт продовца?")
-    input_porol(porol)
                 
             
 
@@ -582,7 +606,7 @@ def save_to_file_for_print(file_neim, prodykt:list[Fish]):
                     file.write("католог рыбного магазина - 'JapaneseWormFromChina 🐛'\n\n")
                     for fisshi in prodykt:
 
-                        file.write(f"print('=='*20\n")
+                        file.write(f"{'=='*20}\n")
                         file.write(f"название продукта -{fisshi.product_name}\n")
                         file.write(f"вид продукта - {fisshi.view}\n")
                         file.write(f"приготовление - {fisshi.preparetion}\n")
